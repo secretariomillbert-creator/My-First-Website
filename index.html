@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Millbert Secretario - Professional Portfolio</title>
+    <meta name="description" content="Millbert Secretario is a web developer focused on thoughtful interfaces, responsive front-end experiences, and practical web systems.">
+    <meta name="theme-color" content="#08070d">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ANIMATED BLUEPRINT GRID BACKGROUND -->
+    <div class="blueprint-bg"></div>
+
+    <!-- TOP NAVIGATION -->
+    <header class="navbar">
+        <a href="#home" class="nav-logo-link">
+    <img src="My picture/logo.png" alt="Millbert DevsDesigner Logo" class="brand-logo">
+</a>
+        <nav class="nav-pill">
+            <a href="#home" class="nav-item active" onclick="setActive(this)">Home</a>
+            <a href="#about" class="nav-item" onclick="setActive(this)">About</a>
+            <a href="#services" class="nav-item" onclick="setActive(this)">Services</a>
+            <a href="#projects" class="nav-item" onclick="setActive(this)">Projects</a>
+            <a href="#contact" class="nav-item" onclick="setActive(this); openContactModal();">Contact</a>
+        </nav>
+        <div class="status-indicator">
+            <span class="pulse-dot"></span>
+            <span class="status-text">Available for work</span>
+        </div>
+    </header>
+
+    <!-- FULL SCREEN HERO SECTION -->
+    <main class="hero-section" id="home">
+        <div class="hero-col hero-left hero-intro">
+            <span class="hero-eyebrow"><span class="pulse-dot"></span> FULL STACK WEB DEVELOPER</span>
+            <h1 class="hero-title">I build digital<br><span>experiences</span> that work.</h1>
+            <p class="hero-description">
+                I’m Millbert, a full stack web developer who turns ideas into polished, reliable web applications. From thoughtful interfaces to the systems behind them, I build for people and real-world results.
+            </p>
+            <div class="hero-actions">
+                <a class="btn-primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
+                <button class="btn-secondary" onclick="openContactModal()">Let’s talk</button>
+            </div>
+            <div class="hero-stack">
+                <span class="hero-stack-label">BUILDING WITH</span>
+                <div class="skill-list">
+                    <span class="skill-badge">HTML &amp; CSS</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">React</span>
+                    <span class="skill-badge">Responsive design</span>
+                </div>
+            </div>
+            <a class="hero-contact-link" href="#about">A little more about me <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-col hero-center">
+            <div class="portrait-stage" id="portrait-stage" aria-label="Portrait of Millbert Secretario">
+                <canvas id="particle-canvas" aria-hidden="true"></canvas>
+                <span class="portrait-caption"><span class="pulse-dot"></span> Available for opportunities</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- INFINITE TECHNOLOGY STICKER STRIP -->
+    <section class="tech-marquee" aria-label="Technologies I work with">
+        <div class="tech-marquee-track"><div class="tech-marquee-group">
+            <span class="tech-sticker"><img class="tech-logo" src="https://cdn.simpleicons.org/html5/E34F26" alt=""> HTML5</span>
+            <span class="tech-sticker"><img class="tech-logo" src="https://cdn.simpleicons.org/python/3776AB" alt=""> Python</span>
+            <span class="tech-sticker"><span class="tech-logo tech-logo-js" aria-hidden="true">JS</span> JavaScript</span>
+            <span class="tech-sticker"><img class="tech-logo" src="https://cdn.simpleicons.org/react/61DAFB" alt=""> React</span>
+            <span class="tech-sticker"><img class="tech-logo" src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt=""> Node.js</span>
+            <span class="tech-sticker"><img class="tech-logo" src="https://cdn.simpleicons.org/figma/F24E1E" alt=""> Figma</span>
+            <span class="tech-sticker"><img class="tech-logo" src="https://cdn.simpleicons.org/cplusplus/00599C" alt=""> C++</span>
+        </div></div>
+        <span class="sr-only">HTML5, Python, JavaScript, React, Node.js, Figma, and C++.</span>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="landing-section about-section" id="about">
+        <div class="section-container about-grid reveal">
+            <div class="about-text-content">
+                <span class="section-tag">ABOUT ME</span>
+                <h2 class="section-heading">Thoughtful engineering, built around <span>people.</span></h2>
+                <p class="about-desc">I’m Millbert, a web developer who enjoys turning complex ideas into clear, useful digital experiences. My work brings interface design and front-end development together, with careful attention to accessibility, responsive layouts, and practical user flows.</p>
+                <p class="about-desc">I’m interested in projects where thoughtful design can make everyday work easier—such as dashboards, HR systems, and information portals. I value clear communication, steady iteration, and details that help a product feel straightforward to use.</p>
+                <button class="btn-secondary" onclick="openContactModal()" style="margin-top: 1rem;">Let's collaborate</button>
+            </div>
+            
+            <div class="about-stats-content">
+                <div class="stats-grid" aria-label="Portfolio statistics">
+                    <div class="stat-item"><span class="stat-number" data-count="2" data-suffix="+">2+</span><span class="stat-label">Years Experience</span></div>
+                    <div class="stat-item"><span class="stat-number" data-count="15" data-suffix="+">15+</span><span class="stat-label">Clients</span></div>
+                    <div class="stat-item"><span class="stat-number" data-count="15" data-suffix="+">15+</span><span class="stat-label">Completed Projects</span></div>
+                    <div class="stat-item"><span class="stat-number" data-count="10" data-suffix="+">10+</span><span class="stat-label">Achievements</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="landing-section services-section" id="services">
+        <div class="section-container reveal">
+            <div class="services-heading"><span class="section-tag">SERVICES</span><h2 class="section-heading">Design and development for <span>work that matters.</span></h2><p class="section-subtext">From early planning and interface design to front-end development, I shape each service around your goals, users, and day-to-day workflows. The result is a clear, responsive experience that is ready to use and easier to maintain.</p></div>
+            <div class="services-grid">
+                <article class="service-card"><span class="service-icon" aria-hidden="true">✳</span><h3>Web &amp; UI/UX Design</h3><p>Plan a clear, accessible user experience and turn it into polished screens that work across devices.</p><ul class="service-capabilities"><li>Page structure and user flows</li><li>Wireframes and clickable prototypes</li><li>Responsive interface design</li></ul><a class="service-link" href="#contact" onclick="openContactModal(); return false;">Learn more <span>↗</span></a></article>
+                <article class="service-card"><span class="service-icon" aria-hidden="true">⌘</span><h3>Front-End Development</h3><p>Build the approved design into a fast, responsive website with useful interactions and accessible details.</p><ul class="service-capabilities"><li>HTML, CSS, and JavaScript</li><li>Responsive pages and components</li><li>Interaction and visual polish</li></ul><a class="service-link" href="#contact" onclick="openContactModal(); return false;">Learn more <span>↗</span></a></article>
+                <article class="service-card"><span class="service-icon" aria-hidden="true">▤</span><h3>Dashboards &amp; Portals</h3><p>Organize records and everyday tasks into practical interfaces for staff, administrators, and visitors.</p><ul class="service-capabilities"><li>HRIS and admin interfaces</li><li>Forms, records, and status views</li><li>Information and archive portals</li></ul><a class="service-link" href="#contact" onclick="openContactModal(); return false;">Learn more <span>↗</span></a></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section class="landing-section projects-clean-container" id="projects">
+        <div class="section-container reveal">
+            <div class="section-title-wrapper">
+                <div>
+                    <span class="section-tag">MY WORK</span>
+                    <h2 class="section-heading">Featured Projects<span>.</span></h2>
+                    <p class="section-subtext projects-intro">A selection of interface and web-system work, spanning HR workflows, digital archives, and administrative tools.</p>
+                </div>
+            </div>
+
+            <div class="projects-scroll-wrapper" id="projectsWrapper">
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Yellow Bumblebee Corp." class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <span class="project-badge">Enterprise System</span>
+                        <h3 class="project-title">Yellow Bumblebee Corp.</h3>
+                        <p class="project-desc">HRIS and asset registry work covering employee record workflows, inventory visibility, and personal data sheets.</p>
+                        <div class="project-tags">
+                            <span>Figma</span>
+                            <span>UI/UX Design</span>
+                            <span>Dashboard</span>
+                        </div>
+                        <button class="btn-project-view" onclick="openProjectModal('p1')">View Project</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="PDEA Virtual Gallery" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <span class="project-badge">Government Web Portal</span>
+                        <h3 class="project-title">PDEA Virtual Gallery</h3>
+                        <p class="project-desc">An interactive digital gallery concept for educational modules and historical drug prevention records.</p>
+                        <div class="project-tags">
+                            <span>Web Design</span>
+                            <span>JavaScript</span>
+                            <span>Interactive UI</span>
+                        </div>
+                        <button class="btn-project-view" onclick="openProjectModal('p2')">View Project</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img-box">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="OADR HRIS Framework" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <span class="project-badge">HR Management</span>
+                        <h3 class="project-title">OADR HRIS Framework</h3>
+                        <p class="project-desc">An HR management interface concept for employee leave tracking, performance reviews, and administrative workflows.</p>
+                        <div class="project-tags">
+                            <span>Design Systems</span>
+                            <span>Tailwind CSS</span>
+                            <span>Prototyping</span>
+                        </div>
+                        <button class="btn-project-view" onclick="openProjectModal('p3')">View Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENT TESTIMONIALS SECTION -->
+    <section class="landing-section testimonials-bg" id="testimonials">
+        <div class="section-container reveal">
+            <div class="section-title-center">
+                <span class="section-tag">TESTIMONIALS</span>
+                <h2 class="section-heading">Client Testimonials<span>.</span></h2>
+                <p class="section-subtext">What clients say about my work.</p>
+            </div>
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <div class="quote-mark" aria-hidden="true">“</div>
+                    <p class="testimonial-text">Millbert transformed our complex HR requirements into an intuitive, modern dashboard. His eye for clean design and fast code execution is top notch.</p>
+                    <div class="client-info"><div class="client-avatar" aria-hidden="true">MS</div><div><h3 class="client-name">Systems Director</h3><span class="client-role">OADR HRIS Project</span></div></div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="quote-mark" aria-hidden="true">“</div>
+                    <p class="testimonial-text">Working with Millbert on the web portal was seamless. He delivers clean prototypes in Figma and translates them flawlessly to functional web interfaces.</p>
+                    <div class="client-info"><div class="client-avatar" aria-hidden="true">PD</div><div><h3 class="client-name">Project Lead</h3><span class="client-role">PDEA Web Portal</span></div></div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="quote-mark" aria-hidden="true">“</div>
+                    <p class="testimonial-text">He effectively bridges the gap between creative visual design and technical development. The asset management suite exceeded our expectations.</p>
+                    <div class="client-info"><div class="client-avatar" aria-hidden="true">YB</div><div><h3 class="client-name">Operations Manager</h3><span class="client-role">Yellow Bumblebee Corp.</span></div></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS -->
+    <section class="landing-section faq-section" id="faq">
+        <div class="section-container faq-layout reveal">
+            <div class="faq-heading">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-heading">A few things you <span>might be wondering.</span></h2>
+                <p class="section-subtext">Quick answers about my services, process, and the kinds of work shown in this portfolio.</p>
+                <button class="btn-secondary" type="button" onclick="openContactModal()">Ask about a project</button>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What services do you offer?</summary>
+                    <p>I work on UI/UX design, responsive front-end development, and interfaces for dashboards, HR systems, and information portals.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What kinds of projects do you work on?</summary>
+                    <p>The portfolio highlights administrative systems, HR workflows, digital galleries, and web portals. Share your goals and I can discuss whether the project is a good fit.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What does your process look like?</summary>
+                    <p>We start by clarifying the audience, goals, and scope. Then I plan the user flows, design the interface, build the responsive experience, and refine it through review.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Which tools and technologies do you use?</summary>
+                    <p>For web work, I use HTML, CSS, JavaScript, and React, with Figma for interface design. The right tools depend on the project requirements.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can you work with an existing design or project?</summary>
+                    <p>Yes. I can help refine an existing interface or continue a project, depending on its current state and the work needed.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How can I get in touch?</summary>
+                    <p>Use “Let’s talk,” “Learn more,” or “Ask about a project” to open the contact form. The form is currently a front-end demo and does not deliver messages yet.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer class="landing-footer" id="contact">
+        <div class="footer-container reveal">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="footer-logo-link" aria-label="Millbert Secretario, back to top"><img src="My picture/logo.png" alt="Millbert DevsDesigner" class="footer-logo-img"></a>
+                    <span class="footer-brand-tag">WEB DEVELOPER <span aria-hidden="true">·</span> UI/UX DESIGN</span>
+                    <p class="footer-bio">Millbert Samson Secretario — web developer focused on intuitive interfaces, responsive front ends, and practical digital systems.</p>
+                </div>
+                
+                <div class="footer-links-grid">
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#testimonials">Testimonials</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#contact" onclick="openContactModal()">Contact</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Expertise</h4>
+                        <a href="#services">UI/UX Systems</a>
+                        <a href="#services">Front-End Development</a>
+                        <a href="#services">Dashboard Interfaces</a>
+                        <a href="#services">Web Portals</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Based in</h4>
+                        <span>Pasig City, Philippines</span>
+                        <span class="footer-availability"><span class="pulse-dot" aria-hidden="true"></span><span class="footer-availability-text">Available for work</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Millbert Secretario. All rights reserved.</p>
+                <div class="footer-bottom-links"><a href="#home">Back to top ↑</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeContactModal()">&times;</button>
+            <h2 class="modal-title">Let's Work Together<span>.</span></h2>
+            <p class="modal-subtitle">Share a few details about your project. This portfolio form is a front-end demo and does not send messages yet.</p>
+            <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="userName">Name</label>
+                    <input type="text" id="userName" placeholder="Millbert Secretario" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email Address</label>
+                    <input type="email" id="userEmail" placeholder="hello@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="userMessage">Project Details</label>
+                    <textarea id="userMessage" rows="4" placeholder="Share your goal or requirements..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary form-submit-btn">
+                    <span>Submit Project Details</span>
+                </button>
+            </form>
+            <div class="success-message" id="successMessage">
+                <div class="check-icon">&#10003;</div>
+                <h3>Thanks for sharing your project</h3>
+                <p>Your message was not sent because this form is not connected to an inbox yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="projectDetailsModal" role="dialog" aria-modal="true" aria-labelledby="pm-title" onclick="if(event.target === this) closeProjectModal()">
+        <div class="modal-content project-modal-content">
+            <button class="modal-close" onclick="closeProjectModal()" aria-label="Close project details">&times;</button>
+            <span class="project-badge" id="pm-badge"></span>
+            <h2 class="modal-title" id="pm-title"></h2>
+            <div class="project-modal-layout">
+                <img class="project-modal-image" id="pm-img" src="" alt="">
+                <div class="project-modal-details">
+                    <div class="project-modal-block">
+                        <span class="project-modal-kicker">PROJECT OVERVIEW</span>
+                        <p class="modal-subtitle" id="pm-desc"></p>
+                    </div>
+                    <div class="project-modal-block">
+                        <h3 class="project-modal-section-title">Key areas</h3>
+                        <ul class="project-modal-highlights" id="pm-highlights"></ul>
+                    </div>
+                    <div class="project-modal-block">
+                        <h3 class="project-modal-section-title">Tools &amp; skills</h3>
+                        <div id="pm-tags"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
