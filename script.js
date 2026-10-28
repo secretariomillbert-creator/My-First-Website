@@ -132,6 +132,39 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const testimonialCarousel = document.getElementById('testimonialCarousel');
+    const testimonialTrack = document.getElementById('testimonialTrack');
+    if (testimonialCarousel && testimonialTrack) {
+        const testimonialSlides = [...testimonialTrack.querySelectorAll('.testimonial-card')];
+        const testimonialDots = [...testimonialCarousel.querySelectorAll('.testimonial-dot')];
+        let activeTestimonial = 0;
+
+        const showTestimonial = index => {
+            activeTestimonial = (index + testimonialSlides.length) % testimonialSlides.length;
+            testimonialSlides.forEach((slide, slideIndex) => {
+                const position = (slideIndex - activeTestimonial + testimonialSlides.length) % testimonialSlides.length;
+                slide.classList.remove('deck-center', 'deck-next', 'deck-prev', 'deck-hidden');
+                slide.classList.add(position === 0 ? 'deck-center' : position === 1 ? 'deck-next' : position === testimonialSlides.length - 1 ? 'deck-prev' : 'deck-hidden');
+                slide.setAttribute('aria-hidden', String(slideIndex !== activeTestimonial));
+            });
+            testimonialDots.forEach((dot, dotIndex) => {
+                const isActive = dotIndex === activeTestimonial;
+                dot.classList.toggle('is-active', isActive);
+                if (isActive) dot.setAttribute('aria-current', 'true');
+                else dot.removeAttribute('aria-current');
+            });
+        };
+
+        document.getElementById('testimonialPrev')?.addEventListener('click', () => showTestimonial(activeTestimonial - 1));
+        document.getElementById('testimonialNext')?.addEventListener('click', () => showTestimonial(activeTestimonial + 1));
+        testimonialDots.forEach((dot, index) => dot.addEventListener('click', () => showTestimonial(index)));
+        testimonialCarousel.addEventListener('keydown', event => {
+            if (event.key === 'ArrowLeft') showTestimonial(activeTestimonial - 1);
+            if (event.key === 'ArrowRight') showTestimonial(activeTestimonial + 1);
+        });
+        showTestimonial(0);
+    }
+
     const statsGrid = document.querySelector('.stats-grid');
     const counters = [...document.querySelectorAll('.stat-number[data-count]')];
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
