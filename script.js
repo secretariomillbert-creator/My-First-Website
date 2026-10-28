@@ -252,14 +252,48 @@ function closeContactModal() {
         setTimeout(() => {
             document.getElementById('contactForm').style.display = 'block';
             document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('contactFormStatus').textContent = '';
         }, 300);
     }
 }
 
-function handleFormSubmit(e) {
+async function handleFormSubmit(e) {
     e.preventDefault();
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'block';
+    const form = e.currentTarget;
+    const status = document.getElementById('contactFormStatus');
+    const submitButton = form.querySelector('[type="submit"]');
+    const submitLabel = submitButton.querySelector('span');
+    const accessKey = form.elements.access_key.value.trim();
+
+    if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        status.textContent = 'Add your Web3Forms access key to enable message delivery.';
+        status.classList.add('is-error');
+        return;
+    }
+
+    status.textContent = '';
+    status.classList.remove('is-error');
+    submitButton.disabled = true;
+    submitLabel.textContent = 'Sending…';
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) throw new Error(result.message || 'Message could not be sent.');
+
+        form.style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+    } catch (error) {
+        status.textContent = error.message || 'Something went wrong. Please try again.';
+        status.classList.add('is-error');
+    } finally {
+        submitButton.disabled = false;
+        submitLabel.textContent = 'Submit Project Details';
+    }
 }
 
 /* Global Click Event for Modals */
