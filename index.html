@@ -89,6 +89,17 @@
                 <h2 class="section-heading">Thoughtful engineering, built around <span>people.</span></h2>
                 <p class="about-desc">I’m Millbert, a web developer who enjoys turning complex ideas into clear, useful digital experiences. My work brings interface design and front-end development together, with careful attention to accessibility, responsive layouts, and practical user flows.</p>
                 <p class="about-desc">I’m interested in projects where thoughtful design can make everyday work easier—such as dashboards, HR systems, and information portals. I value clear communication, steady iteration, and details that help a product feel straightforward to use.</p>
+                <div class="about-socials" aria-label="Social media links">
+                    <a class="social-link" href="https://www.facebook.com/millbert.ioratercesiv" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.4 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.2v3.2H10V21h3.4z"/></svg>
+                    </a>
+                    <a class="social-link" href="https://www.instagram.com/samtario.m/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-fill" cx="17.6" cy="6.7" r="1"/></svg>
+                    </a>
+                    <a class="social-link" href="https://www.linkedin.com/in/millbert-secretario-63b81a266" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="social-fill" d="M5.2 8.6H2.1V21h3.1V8.6zM3.7 3a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6zM21.9 13.9c0-3.7-2-5.5-4.7-5.5-2.2 0-3.2 1.2-3.7 2V8.6h-3.1V21h3.1v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21h3.1v-7.1z"/></svg>
+                    </a>
+                </div>
                 <button class="btn-secondary" onclick="openContactModal()" style="margin-top: 1rem;">Let's collaborate</button>
             </div>
             
@@ -122,12 +133,19 @@
                 <div>
                     <span class="section-tag">MY WORK</span>
                     <h2 class="section-heading">Featured Projects<span>.</span></h2>
-                    <p class="section-subtext projects-intro">A selection of interface and web-system work, spanning HR workflows, digital archives, and administrative tools.</p>
+                    <p class="section-subtext projects-intro">A selection of interface and web-system work, from HR workflows and digital archives to public information and clean-sport campaigns.</p>
                 </div>
             </div>
 
+            <div class="project-filters" role="group" aria-label="Filter projects">
+                <button class="project-filter is-active" type="button" data-project-filter="all" aria-pressed="true">All</button>
+                <button class="project-filter" type="button" data-project-filter="ui-design" aria-pressed="false">UI Design</button>
+                <button class="project-filter" type="button" data-project-filter="web-development" aria-pressed="false">Web Development</button>
+                <p class="project-filter-status" id="projectFilterStatus" aria-live="polite">A closer look at thoughtful design and practical web experiences.</p>
+            </div>
+
             <div class="projects-scroll-wrapper" id="projectsWrapper">
-                <div class="project-card">
+                <div class="project-card" data-project-categories="ui-design web-development">
                     <div class="project-img-box">
                         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Yellow Bumblebee Corp." class="project-img">
                     </div>
@@ -144,14 +162,14 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project-categories="ui-design web-development">
                     <div class="project-img-box">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="PDEA Virtual Gallery" class="project-img">
+                        <img src="My picture/pdea.png" alt="PDEA Virtual Museum website preview" class="project-img">
                     </div>
                     <div class="project-body">
                         <span class="project-badge">Government Web Portal</span>
-                        <h3 class="project-title">PDEA Virtual Gallery</h3>
-                        <p class="project-desc">An interactive digital gallery concept for educational modules and historical drug prevention records.</p>
+                        <h3 class="project-title">PDEA Virtual Museum</h3>
+                        <p class="project-desc">A digital museum experience for exploring historical artifacts, educational resources, and the agency’s drug prevention mission.</p>
                         <div class="project-tags">
                             <span>Web Design</span>
                             <span>JavaScript</span>
@@ -161,7 +179,7 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project-categories="ui-design">
                     <div class="project-img-box">
                         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="OADR HRIS Framework" class="project-img">
                     </div>
@@ -177,6 +195,29 @@
                         <button class="btn-project-view" onclick="openProjectModal('p3')">View Project</button>
                     </div>
                 </div>
+
+                <div class="project-card" data-project-categories="ui-design" data-project-extra hidden>
+                    <div class="project-img-box">
+                        <img src="My picture/phinado.png" alt="PHI-NADO clean sport homepage design" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <span class="project-badge">Website Design Concept</span>
+                        <h3 class="project-title">PHI-NADO · Clean Sport</h3>
+                        <p class="project-desc">A public information homepage concept introducing PHI-NADO’s mission, clean-sport education, and confidential reporting in one clear experience.</p>
+                        <div class="project-tags">
+                            <span>UI Design</span>
+                            <span>Public Information</span>
+                            <span>Responsive Layout</span>
+                        </div>
+                        <button class="btn-project-view" onclick="openProjectModal('p5')">View Project</button>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-more-wrap">
+                <button class="projects-more-button" id="projectsMoreButton" type="button" aria-expanded="false" aria-controls="projectsWrapper">
+                    <span>More projects</span>
+                    <svg class="projects-more-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
             </div>
         </div>
     </section>

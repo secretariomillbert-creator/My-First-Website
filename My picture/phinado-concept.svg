@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">PHI-NADO clean sport homepage concept</title>
+  <desc id="desc">A green and white public information homepage with a clean sport headline, Philippine flag inspired artwork, and Speak Up reporting callout.</desc>
+  <defs>
+    <linearGradient id="flag" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102f85"/><stop offset=".42" stop-color="#c9263b"/><stop offset="1" stop-color="#091c4c"/></linearGradient>
+    <linearGradient id="photo" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#0b1732"/><stop offset="1" stop-color="#08101f"/></linearGradient>
+    <clipPath id="right"><path d="M710 0h490v675H520z"/></clipPath>
+    <filter id="shadow" x="-.2" y="-.2" width="1.4" height="1.4"><feDropShadow dx="0" dy="9" stdDeviation="12" flood-color="#06170d" flood-opacity=".2"/></filter>
+  </defs>
+  <path fill="#fff" d="M0 0h1200v675H0z"/>
+  <g clip-path="url(#right)">
+    <path fill="url(#photo)" d="M520 0h680v675H520z"/>
+    <path fill="#17264a" d="M520 420h680v255H520z"/>
+    <path fill="url(#flag)" d="M718 0h482v352q-130-48-237-17-124 36-243-21z"/>
+    <path fill="#fff" d="M710 0h240L797 407 520 489z"/>
+    <circle cx="802" cy="155" r="63" fill="#f7d21b" opacity=".94"/>
+    <g fill="#f7d21b" opacity=".95"><path d="m802 67 8 27-8 23-8-23zM714 155l27-8 23 8-23 8zM802 243l-8-27 8-23 8 23zM890 155l-27 8-23-8 23-8z"/><circle cx="775" cy="128" r="7"/><circle cx="829" cy="128" r="7"/><circle cx="775" cy="182" r="7"/><circle cx="829" cy="182" r="7"/></g>
+    <g fill="#101522" opacity=".94">
+      <path d="M660 675v-90q0-48 35-63l36-16 31 25 29-26 40 20q30 17 30 60v90z"/><circle cx="762" cy="478" r="35"/>
+      <path d="M852 675v-78q0-42 31-56l35-17 28 25 28-25 38 19q29 16 29 54v78z"/><circle cx="944" cy="492" r="33"/>
+      <path d="M1020 675v-72q0-39 29-53l32-15 25 23 26-23 34 17q26 15 26 51v72z"/><circle cx="1105" cy="496" r="31"/>
+      <path d="M555 675v-73q0-40 29-53l31-15 26 24 25-23 34 17q27 15 27 51v72z"/><circle cx="643" cy="496" r="31"/>
+    </g>
+    <path d="M805 395q142 68 395 4" fill="none" stroke="#f4cb16" stroke-width="5" opacity=".55"/>
+  </g>
+  <path fill="#08612b" d="M0 0h1200v7H0z"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <circle cx="55" cy="41" r="22" fill="#f5d21b"/><circle cx="55" cy="41" r="16" fill="#078343"/><text x="55" y="45" fill="#fff" font-size="11" text-anchor="middle" font-weight="700">PN</text>
+    <text x="88" y="46" fill="#153d22" font-size="19" font-weight="700">PHI-NADO</text>
+    <text x="324" y="45" fill="#17472a" font-size="12">ABOUT</text><text x="390" y="45" fill="#17472a" font-size="12">CLEAN SPORT</text><text x="493" y="45" fill="#17472a" font-size="12">EDUCATION</text>
+    <text x="58" y="155" fill="#153f22" font-size="21" font-style="italic" font-weight="700">Welcome to PHI-NADO</text>
+    <text x="54" y="220" fill="#138342" font-size="57" font-weight="700">Championing</text>
+    <rect x="52" y="231" width="369" height="75" fill="#f8cc16"/><text x="60" y="287" fill="#111" font-size="53" font-weight="700">Clean Sport</text>
+    <text x="54" y="368" fill="#138342" font-size="49" font-weight="700">in the Philippines.</text>
+    <text x="58" y="415" fill="#183622" font-size="15" font-weight="700">Protecting the integrity of Filipino athletes.</text>
+    <text x="58" y="443" fill="#42534a" font-size="13">Promoting fair play through education, support,</text><text x="58" y="464" fill="#42534a" font-size="13">and a commitment to sport free from doping.</text>
+    <rect x="58" y="491" width="132" height="43" rx="21" fill="#079a70"/><text x="82" y="518" fill="#fff" font-size="15" font-weight="700">Learn More →</text>
+    <g filter="url(#shadow)"><rect x="821" y="516" width="343" height="126" rx="21" fill="#fff"/><circle cx="877" cy="579" r="36" fill="#f8d21a"/><path d="M859 570h24l19-12v42l-19-12h-24z" fill="#0b8847"/><path d="M885 570h10v18h-10z" fill="#fff"/><text x="929" y="567" fill="#111" font-size="23" font-weight="700">Speak Up!</text><text x="929" y="592" fill="#343434" font-size="13">Report doping concerns</text><text x="929" y="612" fill="#343434" font-size="13">confidentially.</text></g>
+  </g>
+</svg>

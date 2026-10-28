@@ -69,6 +69,69 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { rootMargin: '-35% 0px -55% 0px' });
     pageSections.forEach(section => navObserver.observe(section));
 
+    const projectFilterButtons = [...document.querySelectorAll('[data-project-filter]')];
+    const projectCards = [...document.querySelectorAll('.project-card[data-project-categories]')];
+    const projectFilterStatus = document.getElementById('projectFilterStatus');
+    const projectsMoreButton = document.getElementById('projectsMoreButton');
+    let projectsExpanded = false;
+    const filterStatusCopy = {
+        all: 'A closer look at thoughtful design and practical web experiences.',
+        'ui-design': 'Interfaces shaped around people, clarity, and everyday use.',
+        'web-development': 'Responsive web projects built to work across devices.'
+    };
+    projectFilterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.projectFilter;
+            projectFilterButtons.forEach(filterButton => {
+                const isActive = filterButton === button;
+                filterButton.classList.toggle('is-active', isActive);
+                filterButton.setAttribute('aria-pressed', String(isActive));
+            });
+
+            if (projectFilterStatus) {
+                projectFilterStatus.textContent = filterStatusCopy[filter] || filterStatusCopy.all;
+                projectFilterStatus.classList.remove('status-enter');
+                void projectFilterStatus.offsetWidth;
+                projectFilterStatus.classList.add('status-enter');
+            }
+
+            document.getElementById('projectsWrapper')?.classList.toggle('has-project-filter', filter !== 'all');
+            projectCards.forEach(card => {
+                const categories = card.dataset.projectCategories.split(/\s+/);
+                const matchesFilter = filter === 'all' || categories.includes(filter);
+                const isExtraCard = card.hasAttribute('data-project-extra');
+                const isVisible = matchesFilter && (projectsExpanded || !isExtraCard);
+                card.hidden = !isVisible;
+                card.classList.remove('filter-reveal');
+                if (isVisible) {
+                    void card.offsetWidth;
+                    card.classList.add('filter-reveal');
+                }
+            });
+
+            document.getElementById('projectsWrapper')?.scrollTo({ left: 0, behavior: 'smooth' });
+        });
+    });
+
+    projectsMoreButton?.addEventListener('click', () => {
+        projectsExpanded = !projectsExpanded;
+        projectsMoreButton.setAttribute('aria-expanded', String(projectsExpanded));
+        projectsMoreButton.querySelector('span').textContent = projectsExpanded ? 'Show fewer projects' : 'More projects';
+        projectsMoreButton.classList.toggle('is-expanded', projectsExpanded);
+
+        const activeFilter = document.querySelector('[data-project-filter].is-active')?.dataset.projectFilter || 'all';
+        projectCards.filter(card => card.hasAttribute('data-project-extra')).forEach(card => {
+            const categories = card.dataset.projectCategories.split(/\s+/);
+            const matchesFilter = activeFilter === 'all' || categories.includes(activeFilter);
+            card.hidden = !projectsExpanded || !matchesFilter;
+            if (!card.hidden) {
+                card.classList.remove('filter-reveal');
+                void card.offsetWidth;
+                card.classList.add('filter-reveal');
+            }
+        });
+    });
+
     const statsGrid = document.querySelector('.stats-grid');
     const counters = [...document.querySelectorAll('.stat-number[data-count]')];
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -116,10 +179,10 @@ const projectsData = {
         tags: ['Figma', 'UI/UX Design', 'Dashboard', 'React.js', 'Enterprise Architecture']
     },
     'p2': {
-        title: 'PDEA Virtual Gallery',
+        title: 'PDEA Virtual Museum',
         badge: 'Government Web Portal',
-        image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
-        desc: 'An interactive digital gallery concept for educational modules and historical drug prevention records.',
+        image: 'My picture/pdea.png',
+        desc: 'A digital museum experience for exploring historical artifacts, educational resources, and the agency’s drug prevention mission.',
         highlights: ['Educational content organized into modules', 'Interactive gallery browsing', 'Accessible, straightforward page flow'],
         tags: ['Web Design', 'JavaScript (ES6)', 'Interactive UI', 'HTML5 / CSS3']
     },
@@ -130,6 +193,14 @@ const projectsData = {
         desc: 'An HR management interface concept for employee leave tracking, performance reviews, and administrative workflows.',
         highlights: ['Employee leave tracking', 'Performance review workflows', 'Reusable interface components'],
         tags: ['Design Systems', 'Tailwind CSS', 'Prototyping', 'Component Architecture']
+    },
+    'p5': {
+        title: 'PHI-NADO · Championing Clean Sport',
+        badge: 'Website Design Concept',
+        image: 'My picture/phinado.png',
+        desc: 'A homepage concept for the Philippine National Anti-Doping Organization (PHI-NADO), shaped around a clear clean-sport message and easy paths to useful information for Filipino athletes.',
+        highlights: ['A bold hero that introduces the clean-sport mission', 'Clear routes to athlete education and anti-doping information', 'A prominent Speak Up callout for confidential reporting'],
+        tags: ['UI Design', 'Public Information', 'Clean Sport', 'Responsive Layout']
     },
     'p4': {
         title: 'Delivery Pipeline Lab',
@@ -148,6 +219,7 @@ function openProjectModal(projectId) {
     const image = document.getElementById('pm-img');
     image.src = data.image;
     image.alt = `${data.title} project preview`;
+    image.classList.toggle('project-image-full', projectId === 'p2' || projectId === 'p5');
     document.getElementById('pm-badge').innerText = data.badge;
     document.getElementById('pm-title').textContent = data.title;
     document.getElementById('pm-desc').innerText = data.desc;
@@ -390,9 +462,7 @@ function initParticles() {
     if (!stage || !canvas || !ctx) return;
     canvas.width = stage.clientWidth;
     canvas.height = stage.clientHeight;
-    particles = [];
-    portraitFallbackCanvas = null;
-    usePortraitFallback = false;
+    if (!canvas.width || !canvas.height || !portraitImg.naturalWidth) return;
 
     const scale = Math.min(canvas.width / portraitImg.naturalWidth, canvas.height / portraitImg.naturalHeight) * 1.15;
     drawW = portraitImg.naturalWidth * scale;
@@ -400,53 +470,17 @@ function initParticles() {
     startX = (canvas.width - drawW) / 2;
     startY = ((canvas.height - drawH) / 2) + 10;
 
-    const offCanvas = document.createElement('canvas');
-    offCanvas.width = canvas.width;
-    offCanvas.height = canvas.height;
-    const offCtx = offCanvas.getContext('2d');
-    offCtx.drawImage(portraitImg, startX, startY, drawW, drawH);
-
-    try {
-        const imgData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imgData.data;
-        const gap = 4;
-
-        for (let y = 0; y < canvas.height; y += gap) {
-            for (let x = 0; x < canvas.width; x += gap) {
-                const index = (y * canvas.width + x) * 4;
-                const r = data[index];
-                const g = data[index + 1];
-                const b = data[index + 2];
-                const alpha = data[index + 3];
-
-                const isWhite = r > 235 && g > 235 && b > 235;
-                if (alpha > 40 && !isWhite) {
-                    particles.push(new BurstParticle(x, y, `rgb(${r},${g},${b})`));
-                }
-            }
-        }
-    } catch (e) {
-        usePortraitFallback = true;
-    }
-
-    if (particles.length === 0) usePortraitFallback = true;
-
-    if (usePortraitFallback) {
-        const pixelSize = 4;
-        portraitFallbackCanvas = document.createElement('canvas');
-        portraitFallbackCanvas.width = Math.max(1, Math.ceil(canvas.width / pixelSize));
-        portraitFallbackCanvas.height = Math.max(1, Math.ceil(canvas.height / pixelSize));
-        const fallbackCtx = portraitFallbackCanvas.getContext('2d');
-        if (fallbackCtx) {
-            fallbackCtx.drawImage(
-                portraitImg,
-                startX / pixelSize,
-                startY / pixelSize,
-                drawW / pixelSize,
-                drawH / pixelSize
-            );
-        }
-    }
+    // Render a low-resolution copy and enlarge it with hard pixel edges.
+    // This avoids getImageData security restrictions on local previews.
+    const pixelSize = 4;
+    portraitFallbackCanvas = document.createElement('canvas');
+    portraitFallbackCanvas.width = Math.max(1, Math.ceil(canvas.width / pixelSize));
+    portraitFallbackCanvas.height = Math.max(1, Math.ceil(canvas.height / pixelSize));
+    const fallbackCtx = portraitFallbackCanvas.getContext('2d');
+    if (!fallbackCtx) return;
+    fallbackCtx.imageSmoothingEnabled = true;
+    fallbackCtx.drawImage(portraitImg, startX / pixelSize, startY / pixelSize, drawW / pixelSize, drawH / pixelSize);
+    usePortraitFallback = true;
 }
 
 function startPortraitRenderer() {
