@@ -66,13 +66,13 @@ a { color: inherit; }
 .hero-section {
     position: relative;
     width: min(1200px, calc(100% - 64px)); min-height: min(780px, calc(100svh - 100px)); margin: 0 auto;
-    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(380px, .8fr); align-items: center; gap: clamp(40px, 7vw, 100px);
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(380px, .85fr); align-items: center; gap: clamp(40px, 6vw, 82px);
     padding: 54px 0 76px;
 }
 .hero-intro { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; }
 .hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 24px; color: var(--yellow); font-size: .72rem; font-weight: 700; letter-spacing: .16em; }
-.hero-title { position: relative; z-index: 1; max-width: 680px; margin: 0 0 22px; color: var(--text); font-size: clamp(3.1rem, 6.1vw, 5.6rem); font-weight: 740; letter-spacing: -.078em; line-height: .98; text-wrap: balance; text-shadow: 0 2px 22px rgba(8,7,13,.48); }
-.hero-title span { color: transparent; font-size: .96em; letter-spacing: -.065em; background: linear-gradient(105deg, #a78bfa 0%, #d8ccff 48%, #facc15 88%, #a78bfa 100%); background-size: 180% 100%; background-clip: text; -webkit-background-clip: text; animation: titleGlow 9s ease-in-out infinite alternate; }
+.hero-title { position: relative; z-index: 1; max-width: 700px; margin: 0 0 22px; color: var(--text); font-size: clamp(3.2rem, 6.1vw, 5.6rem); font-weight: 700; letter-spacing: -.075em; line-height: .99; }
+.hero-title span { color: transparent; background: linear-gradient(105deg, var(--purple) 4%, #d8ccff 48%, var(--yellow) 86%, var(--purple)); background-size: 180% 100%; background-clip: text; -webkit-background-clip: text; animation: titleGlow 9s ease-in-out infinite alternate; }
 .hero-description { max-width: 555px; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.85; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 30px 0 34px; }
 .btn-primary, .btn-secondary, .btn-project-view, .footer-btn {

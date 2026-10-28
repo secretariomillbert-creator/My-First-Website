@@ -333,9 +333,11 @@ const stage = document.getElementById('portrait-stage');
 
 let particles = [];
 const mouse = { x: null, y: null, prevX: null, prevY: null, vx: 0, vy: 0, radius: 45 };
+let portraitFallbackCanvas = null;
+let usePortraitFallback = false;
 
 const portraitImg = new Image();
-portraitImg.src = 'My picture/portrait.png';
+let portraitAnimationStarted = false;
 
 let drawW = 0, drawH = 0, startX = 0, startY = 0;
 
@@ -389,6 +391,8 @@ function initParticles() {
     canvas.width = stage.clientWidth;
     canvas.height = stage.clientHeight;
     particles = [];
+    portraitFallbackCanvas = null;
+    usePortraitFallback = false;
 
     const scale = Math.min(canvas.width / portraitImg.naturalWidth, canvas.height / portraitImg.naturalHeight) * 1.15;
     drawW = portraitImg.naturalWidth * scale;
@@ -422,16 +426,49 @@ function initParticles() {
             }
         }
     } catch (e) {
-        ctx.drawImage(portraitImg, startX, startY, drawW, drawH);
+        usePortraitFallback = true;
+    }
+
+    if (particles.length === 0) usePortraitFallback = true;
+
+    if (usePortraitFallback) {
+        const pixelSize = 4;
+        portraitFallbackCanvas = document.createElement('canvas');
+        portraitFallbackCanvas.width = Math.max(1, Math.ceil(canvas.width / pixelSize));
+        portraitFallbackCanvas.height = Math.max(1, Math.ceil(canvas.height / pixelSize));
+        const fallbackCtx = portraitFallbackCanvas.getContext('2d');
+        if (fallbackCtx) {
+            fallbackCtx.drawImage(
+                portraitImg,
+                startX / pixelSize,
+                startY / pixelSize,
+                drawW / pixelSize,
+                drawH / pixelSize
+            );
+        }
     }
 }
 
-portraitImg.onload = () => {
+function startPortraitRenderer() {
     if (!stage || !canvas || !ctx) return;
+    if (!stage.clientWidth || !stage.clientHeight) {
+        requestAnimationFrame(startPortraitRenderer);
+        return;
+    }
     initParticles();
-    animate();
-};
-window.addEventListener('resize', () => { if (portraitImg.complete && stage && canvas && ctx) initParticles(); });
+    if (!portraitAnimationStarted) {
+        portraitAnimationStarted = true;
+        animate();
+    }
+}
+
+portraitImg.onload = startPortraitRenderer;
+portraitImg.src = 'My picture/portrait.png';
+if (portraitImg.complete && portraitImg.naturalWidth) startPortraitRenderer();
+
+window.addEventListener('resize', () => {
+    if (portraitImg.complete && portraitImg.naturalWidth && stage && canvas && ctx) initParticles();
+});
 
 if(stage) {
     stage.addEventListener('mousemove', (e) => {
@@ -459,9 +496,21 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     mouse.vx *= 0.8; mouse.vy *= 0.8;
 
-    for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+    if (usePortraitFallback && portraitFallbackCanvas) {
+        const pixelSize = 4;
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(portraitFallbackCanvas, 0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = '#000';
+        for (let x = pixelSize - 1; x < canvas.width; x += pixelSize) ctx.fillRect(x, 0, 1, canvas.height);
+        for (let y = pixelSize - 1; y < canvas.height; y += pixelSize) ctx.fillRect(0, y, canvas.width, 1);
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.imageSmoothingEnabled = true;
+    } else {
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
     }
 
     if (mouse.x !== null && mouse.y !== null) {
